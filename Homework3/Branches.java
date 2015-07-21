@@ -75,7 +75,7 @@ class RockPaperScissors {
 	 */
 	private static void determineWinner(int opponentNum) {
 		Random tRNG = new Random();
-		int myNum = tRNG.nextInt(3);
+		int myNum = tRNG.nextInt(3);		//Making a random number between 0 and 3 
 
 		/*Print what I picked*/
 		System.out.println("I picked " + rps.get(myNum) + ".");
