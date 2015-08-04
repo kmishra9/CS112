@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;HelloWorld.java&apos; to &apos;HelloWorldProject/src/com.charleskelly.hello&apos;&#x0A;- Original project: &apos;SecondProject&apos;&#x0A;- Destination element: &apos;HelloWorldProject/src/com.charleskelly.hello&apos;&#x0A;- Original element: &apos;HelloWorld.java&apos;" description="Copy file" destination="=HelloWorldProject/src&lt;com.charleskelly.hello" element1="Ex_Files_UaR_Eclipse/Exercise Files/Ch02/HelloWorld.java" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1438584339517" units="0" version="1.0"/>
+</session>
