@@ -1,0 +1,116 @@
+package main;
+
+import java.util.concurrent.CountDownLatch;
+
+public class Life1D {
+	private Rule rule;
+	private int stepCount;
+	public static void main (String [ ] args) {
+		Life1D simulation = new Life1D ( );
+		simulation.processArgs (args);
+		simulation.producePBM ( );
+	}
+	// Print, in Portable Bitmap format, the image corresponding to the rule and step count
+	// specified on the command line.
+	public void producePBM ( ) {
+		// TODO: You fill this in.
+		
+		//Making a new array of size and filling it with stepcount "empty pixels" on either side of the activated one
+		int[] pixels = new int[stepCount*2 + 1];
+		pixels[pixels.length/2] = 1;
+		
+		//Begin drawing the array, with each loop being a timestep and go the number of steps specified 
+		int currentTime = 0;
+		while (currentTime < stepCount) {
+			
+			//Print the state of the current array
+			for (int num : pixels) {
+				System.out.print(num);
+			}
+			System.out.println("\n");
+			
+			//Make a copy to fill in the next time step
+			int[] pixelsCpy = new int[pixels.length];
+			
+			//Run through the array and configure it for its next output
+			for (int index = 0; index < pixels.length; index += 1) {
+				//Preventing out of bounds errors
+				int a = 0, c = 0, b = pixels[index];
+				if (index-1 > 0)						a = pixels[index - 1];
+				if (index+1 < pixels.length)			c = pixels[index + 1];
+				
+				//Run the rule to determine what the next timestep should display
+				pixelsCpy[index] = this.rule.output(a, b, c);
+				
+			}
+			
+			//Advance the time step
+			currentTime += 1;
+		}
+		
+		
+		
+		
+	}
+	// Retrieve the command-line arguments, and convert them to values for the rule number 
+	// and the timestep count.
+	private void processArgs (String [ ] args) {
+		/*Checks that enough arguments are given to allow a step and rulecount*/
+		if (args.length != 2) {
+			System.err.println ("Usage:  java Life1D rule# rowcount");
+			System.exit (1);
+		}
+		
+		/*Checks that a valid rule was supplied*/
+		try {
+			rule = new Rule (Integer.parseInt (args[0]));
+		} catch (Exception ex) {
+			System.err.println ("The first argument must specify a rule number.");
+			System.exit (1);
+		}
+		
+		/*Checks that a valid step count was given*/
+		try {
+			stepCount = Integer.parseInt (args[1]);
+		} catch (Exception ex) {
+			System.err.println ("The second argument must specify the number of lines in the output.");
+			System.exit (1);
+		}
+		if (stepCount < 1) {
+			System.err.println ("The number of output lines must be a positive number.");
+			System.exit (1);
+		}
+	}
+}
+class Rule {
+	// Whatever instance variables you need should be declared here.
+	int[] ruleMap = new int[8];
+	
+	public Rule (int ruleNum) {
+		
+		//Go through each bit and check if its on or not (either a zero or one)
+		int power = 1, index = 0;
+		while (index < 8) {
+			
+			//Checks if the bit is on, if it is it converts the return to 1, if not, 0 and 1 is still 1
+			ruleMap[index] = (ruleNum & power) & 1;
+			
+			power *= 2;		//Advance the power to the next power of two
+			index += 1;		//Advances the index of the bit
+		}
+		
+		
+	}
+	// Return the output that this rule prescribes for the given input.
+	// a, b, and c are each either 1 or 0; 4*a+2*b+c is the input for the rule.
+	public int output (int a, int b, int c) {
+		// TODO: You fill this in.
+		
+		//Generate the 3 bit number or "situation" 
+		int threeBit = c + b*2 + a*2*2;
+		
+		//Check it against the ruleMap
+		
+		return 0;
+	}
+}

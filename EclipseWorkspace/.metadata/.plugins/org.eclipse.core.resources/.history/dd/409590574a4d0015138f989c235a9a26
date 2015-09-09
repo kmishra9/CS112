@@ -1,0 +1,80 @@
+package main;
+
+public class Life1D {
+	private Rule rule;
+	private int stepCount;
+	public static void main (String [ ] args) {
+		Life1D simulation = new Life1D ( );
+		simulation.processArgs (args);
+		simulation.producePBM ( );
+	}
+	// Print, in Portable Bitmap format, the image corresponding to the rule and step count
+	// specified on the command line.
+	public void producePBM ( ) {
+		// TODO: You fill this in.
+		
+		//Making a new array of size and filling it with stepcount "empty pixels" on either side of the activated one
+		int[] pixels = new int[stepCount*2 + 1];
+		pixels[pixels.length/2 + 1] = 1;
+		
+		//Begin drawing the array, with each loop being a timestep and go the number of steps specified 
+		int currentTime = 0;
+		while (currentTime < stepCount) {
+			
+			//Print the state of the current array
+			for (int num : pixels) {
+				if (num == 0) System.out.print(" ");
+				else 		  System.out.print(new Character(254));
+			}
+			System.out.println("\n");
+			
+			//Advance the time step
+			currentTime += 1;
+		}
+		
+		
+		
+		
+	}
+	// Retrieve the command-line arguments, and convert them to values for the rule number 
+	// and the timestep count.
+	private void processArgs (String [ ] args) {
+		/*Checks that enough arguments are given to allow a step and rulecount*/
+		if (args.length != 2) {
+			System.err.println ("Usage:  java Life1D rule# rowcount");
+			System.exit (1);
+		}
+		
+		/*Checks that a valid rule was supplied*/
+		try {
+			rule = new Rule (Integer.parseInt (args[0]));
+		} catch (Exception ex) {
+			System.err.println ("The first argument must specify a rule number.");
+			System.exit (1);
+		}
+		
+		/*Checks that a valid step count was given*/
+		try {
+			stepCount = Integer.parseInt (args[1]);
+		} catch (Exception ex) {
+			System.err.println ("The second argument must specify the number of lines in the output.");
+			System.exit (1);
+		}
+		if (stepCount < 1) {
+			System.err.println ("The number of output lines must be a positive number.");
+			System.exit (1);
+		}
+	}
+}
+class Rule {
+	// Whatever instance variables you need should be declared here.
+	public Rule (int ruleNum) {
+		// TODO: You fill in the code for this constructor.
+	}
+	// Return the output that this rule prescribes for the given input.
+	// a, b, and c are each either 1 or 0; 4*a+2*b+c is the input for the rule.
+	public int output (int a, int b, int c) {
+		// TODO: You fill this in.
+		return 0;
+	}
+}
